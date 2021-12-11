@@ -8,6 +8,27 @@ from PIL import Image, ImageOps
 app = Flask(__name__)
 
 
+"""
+    We obtained this file and the keras_model.h5 file from teachable machine.
+
+    We added the result variable at the bottom of the code to hold the result
+    of the prediction. Depending on how you enter in your classes into teachable
+    machine will determine the prediction for your output. 
+
+    For example, in teachable machine, when we uploaded the images the first class 
+    was labeled Fifty and the second class was labeled Hundred. The prediction that 
+    the model returns is an array of arrays, so essentially a 2D array. If the first 
+    element[0][0] is more than 0.5.... that means the image you uploaded is more than
+    likely a Fifty Dollar bill. If the second element[0][1] is more than 0.5... then 
+    the image is a Hundred Dollar bill. Which is why we incorporated the if statment 
+    at the bottom. 
+
+    As previously mentioned, python will return this result if the image is a
+    Fifty Dollar Bill or a Hundred Dollar Bill to server.js and server.js will return 
+    the result to app.js and display it. 
+"""
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     # Load the model
@@ -35,7 +56,7 @@ def predict():
     prediction = model.predict(data)
     print(prediction)
     result = None
-    print('gfdgdfg', prediction[0][0])
+    print('gfdgdfg', prediction[0][1])
     if prediction[0][0] > 0.50:
         result = 'fifty'
     else:
