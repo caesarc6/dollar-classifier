@@ -1,4 +1,6 @@
 import { useState, Fragment } from "react";
+import logo from "./logo.png";
+import "./App.css";
 
 /* 
   Instead of using state within classes, our project uses React Hooks. Which allows us to 
@@ -67,7 +69,20 @@ const App = () => {
   return (
     <Fragment>
       <form onSubmit={onSubmit}>
-        <div className="custom-file">
+        <div className="container mt-4">
+          <h4 className="display-4 text-center mb-4">
+            Common Cents
+            <img
+              src={logo}
+              alt="CommonCents Logo"
+              align="center"
+              width="80"
+              height="90"
+            />
+          </h4>
+        </div>
+
+        <div className="custom-file" align="center">
           <input
             type="file"
             className="custom-file-input"
@@ -78,13 +93,18 @@ const App = () => {
             {filename}
           </label>
         </div>
-        <input
-          type="submit"
-          value="Upload"
-          className="btn btn-primary btm-block mt-4"
-        />
+
+        <div className="submitButton" align="center">
+          <input
+            type="submit"
+            value="Upload"
+            className="btn btn-primary btm-block mt-4"
+          />
+        </div>
       </form>
-      {prediction && <h1>{prediction.prediction}</h1>}
+      <div className="prediction" align="center">
+        {prediction && <h1>{prediction.prediction}</h1>}
+      </div>
     </Fragment>
   );
 };

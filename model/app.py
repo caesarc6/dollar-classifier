@@ -54,9 +54,9 @@ def predict():
 
     # run the inference
     prediction = model.predict(data)
-    print(prediction)
+    # print(prediction)
     result = None
-    print('gfdgdfg', prediction[0][1])
+    #print('gfdgdfg', prediction[0][1])
     if prediction[0][0] > 0.50:
         result = 'fifty'
     else:

@@ -22,7 +22,7 @@ app.use(cors());
  * express is going to return an error message, "No File uploaded".
  *
  * 2. If a file is uploaded express is then going to send that file to the app.py file
- * located in the model folder. We can't just send over the file we uploaded because the 
+ * located in the model folder. We can't just send over the file we uploaded because the
  * path must be a URL.
  *
  * 3. In order to do this, we are going to create an "uploads" folder; whenever an image
@@ -31,7 +31,7 @@ app.use(cors());
  * 4. Now that the image is in the uploads folder, we obtained the URL as seen in the
  * formData varaible.
  *
- * 5. The server.js file is now going to send the file over to the app.py file, which is 
+ * 5. The server.js file is now going to send the file over to the app.py file, which is
  * done by using a fetch request and looking towards the /predict endpoint.
  *
  * 6. After the app.py looks at the image we uploaded and predicts what kind of currency
