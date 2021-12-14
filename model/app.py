@@ -1,9 +1,12 @@
-import json
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
+import json
 import numpy as np
 from flask import Flask, request
 from keras.models import load_model
 from PIL import Image, ImageOps
+
 
 app = Flask(__name__)
 
@@ -32,7 +35,7 @@ app = Flask(__name__)
 @app.route('/predict', methods=['POST'])
 def predict():
     # Load the model
-    model = load_model('keras_model.h5')
+    model = load_model('keras_model.h5', compile=False)
 
     # Create the array of the right shape to feed into the keras model
     # The 'length' or number of images you can put into the array is
@@ -58,8 +61,8 @@ def predict():
     result = None
     #print('gfdgdfg', prediction[0][1])
     if prediction[0][0] > 0.50:
-        result = 'fifty'
+        result = 'Fifty'
     else:
-        result = 'hundred'
+        result = 'Hundred'
 
     return {'prediction': result}

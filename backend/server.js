@@ -45,46 +45,55 @@ app.use(cors());
  *
  */
 app.post("/upload", async (req, res) => {
-  if (req.files === null) {
-    return res.status(400).json({ msg: "No file uploaded" });
-  }
-
-  // fetch request to flask
-  const file = req.files.file;
-
-  //moves the file to this upload directory
-  file.mv(
-    `/home/melissapersaud/CTP/dollar-classifier/backend/uploads/${file.name}`,
-    (err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).send(err);
-      }
+  try {
+    if (req.files === null) {
+      return res.status(400).json({ msg: "No file uploaded" });
     }
-  );
 
-  /*
-   ADD ERROR HANDLING TO FLUFF UP THE EXPRESS ENDPOINT.
-  */
-  const formData = new FormData();
-  formData.append(
-    "file",
-    fs.createReadStream(
-      `/home/melissapersaud/CTP/dollar-classifier/backend/uploads/${file.name}`
-    )
-  );
+    // fetch request to flask
+    const file = req.files.file;
 
-  let prediction;
+    //moves the file to this upload directory
+    file.mv(
+      `/home/melissapersaud/CTP/dollar-classifier/backend/uploads/${file.name}`,
+      (err) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+      }
+    );
 
-  fetch("http://127.0.0.1:5000/predict", {
-    method: "POST",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      prediction = data;
-      return res.json(prediction);
-    });
+    /*
+     ADD ERROR HANDLING TO FLUFF UP THE EXPRESS ENDPOINT.
+    */
+    const formData = new FormData();
+    formData.append(
+      "file",
+      fs.createReadStream(
+        `/home/melissapersaud/CTP/dollar-classifier/backend/uploads/${file.name}`
+      )
+    );
+
+    let prediction;
+
+    fetch("http://127.0.0.1:5000/predict", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        prediction = data;
+        return res.json(prediction);
+      })
+      .catch((err) => {
+        return res
+          .status(400)
+          .json({ msg: "There was an error with the model" });
+      });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ msg: "There was an error" });
+  }
 });
 
 app.listen(4000, () => console.log("Server Started..."));

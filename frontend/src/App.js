@@ -22,7 +22,7 @@ const App = () => {
   const [file, setFile] = useState();
   const [filename, setFileName] = useState("Choose File");
   const [prediction, setPrediction] = useState(null);
-
+  const [error, setError] = useState(null);
   /*
     The onChange function is connected to our input field from our form. Once we have selected the
     image, this function is going to the set the file and the name of the file in the varaibles file and
@@ -53,7 +53,6 @@ const App = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    //console.log(file);
 
     fetch("http://localhost:4000/upload", {
       method: "POST",
@@ -61,9 +60,9 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data.msg);
         setPrediction(data);
-      });
+      })
+      .catch((err) => setError(err));
   };
 
   return (
@@ -88,6 +87,7 @@ const App = () => {
             className="custom-file-input"
             id="customFile"
             onChange={onChange}
+            required
           />
           <label className="custom-file-label" htmlFor="customFile">
             {filename}
@@ -104,6 +104,10 @@ const App = () => {
       </form>
       <div className="prediction" align="center">
         {prediction && <h1>{prediction.prediction}</h1>}
+      </div>
+
+      <div className="error" align="center">
+        {error && <h1>{error}</h1>}
       </div>
     </Fragment>
   );
