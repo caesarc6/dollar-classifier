@@ -21,6 +21,9 @@ Note: This web application uses machine learning algorithms to be able to differ
 3. `cd` into the `backend` folder and run `npm install`.
 4. Make sure you have python and pipenv installed on your machine, this is mandatory to be able to get this project up and running.
 5. `cd` into the `model` folder and run `pipenv install`.
+6. Run `pipenv shell` to activate the python environment.
+
+Please note: You will need three separate terminals: one for the frontend folder, one for the backend folder and one for the model folder.
 
 ## Running the project:
 
