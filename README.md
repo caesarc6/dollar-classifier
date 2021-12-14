@@ -49,14 +49,16 @@ Once the application is up and running, you can upload a file/picture of a $50 o
 
 Please be aware that the trained model is not 100% accurate. There might be an instance where the file you upload will have the wrong output.
 
-## Next steps: 
-There are a few features that we want to add to our project: 
-1. Display the image that the user uploaded onto the screen. 
-2. Feedback section, where the user can tell us if the output that was provided was correct or not. 
+## Next steps:
+
+There are a few features that we want to add to our project:
+
+1. Display the image that the user uploaded onto the screen.
+2. Feedback section, where the user can tell us if the output that was provided was correct or not.
 3. Accessibility options: have the output be read out loud to the user.
 
 ## Team Members:
 
-Caesar Cuzco, student at John Jay College: github: caesarc6
-Shaniya Snagg, student at John Jay College: github: shaniyas13
-Melissa Persaud, student at Queens College: github: melissapersaud17
+1. Caesar Cuzco, student at John Jay College: github: caesarc6
+2. Shaniya Snagg, student at John Jay College: github: shaniyas13
+3. Melissa Persaud, student at Queens College: github: melissapersaud17
